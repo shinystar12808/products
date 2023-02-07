@@ -1,12 +1,18 @@
-#讀取檔案
+import os #operating system作業系統
+
 products = [] #大清單
-with open('products.csv', 'r',encoding = 'utf-8') as f: #寫入或讀取都有編碼的問體所以要調整
-	for line in f:
-		if '商品,價格' in line:
-			continue #'繼續'，只能在迴圈(5-8行為一個迴圈)中使用，意指跳到下一迴的意思(這一迴的迴圈不會執行7-8行)
-		name, price= line.strip().split(',')#先把尾巴換行符號去掉，後再每一行遇到逗點就進行切割(split切割完會變成清單)
-		products.append([name, price]) 
-print(products)
+# 檢查檔案後，若有就讀取檔案
+if os.path.isfile('products.csv'): #於os中使用path模組找尋有無此檔案(isfile)
+	print('YEAH!找到檔案了!')
+	with open('products.csv', 'r',encoding = 'utf-8') as f: #寫入或讀取都有編碼的問體所以要調整
+		for line in f:
+			if '商品,價格' in line:
+				continue #'繼續'，只能在迴圈(5-8行為一個迴圈)中使用，意指跳到下一迴的意思(這一迴的迴圈不會執行7-8行)
+			name, price= line.strip().split(',')#先把尾巴換行符號去掉，後再每一行遇到逗點就進行切割(split切割完會變成清單)
+			products.append([name, price]) 
+	print(products)
+else:
+	print('找不到檔案.....')
 
 #讓使用者輸入
 while True:
@@ -14,7 +20,7 @@ while True:
 	if name == 'q':
 		break
 	price = input('請輸入商品價格:')
-	products.append([name, price]) #建立小清單，並裝入大清單中
+	p1roducts.append([name, price]) #建立小清單，並裝入大清單中
 print(products) #印出大清單
 
 # 印出所有購買紀錄
